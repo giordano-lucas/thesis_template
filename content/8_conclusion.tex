@@ -1,0 +1,52 @@
+%In the conclusion, you repeat the main result and finalise the discussion of
+%your project. Mention the core results and why and how your system
+%advances the status quo.
+
+\section{Contributions}
+
+In this thesis, I developed an uncertainty quantification package that can transform any \textit{scikit-learn} compatible estimator into an estimator capable of evaluating its uncertainty. It gathers models from the scientific literature and existing open-source libraries such as \textit{scikit-learn}, \textit{CatBoost} and \textit{XGBoost} in a standardised and user-friendly API. Models can be trained and evaluated, and predictions can be visualised using pre-defined plots. Additionally, the adversarial training capabilities provide UQ robustness to out-of-distribution data.
+
+Due to the package's versatility, it can be applied to a vast range of applications. Existing non-UQ machine learning workflows can effortlessly leverage the package's capabilities by simply using one of our wrappers. No expertise in UQ is required to start experimenting with it, which fosters its adoption.  
+
+% recalibration tools
+% Results can be generalised to other types of attacks.
+This package has been validated on the Boston housing and breast cancer datasets. Ensembles of Random Forests and Gradient Boosted Trees generally lead to the top UQ performance in our experiments. For models such as RF or GBT, intrinsic UQ seems to yield better results than an extrinsic model based on quantile regression. However, these results should be cautiously considered, as they are dataset dependent. 
+When it comes to out-of-distribution UQ robustness, models were evaluated using three different types of attacks. It was shown that adversarial training based on any of these attacks improves UQ quality, which is generalisable to all attack types considered in this work. Furthermore, adversarial ensembles were introduced to enhance the performance even further.   
+% Models trained to defend against a single attack demonstrate generalisation properties to others.
+\newpage 
+
+
+In the field of factuality for graph-to-text models, a relationship between entropy and hallucination has been established via an evaluation process on a synthetic dataset. The latter was focused on hallucinations occurring due to missing edge information and was built specifically for this purpose. This development motivated the introduction of two factual UQ metrics: the mean hallucination entropy and mean hallucination entropy difference. In addition, the binary labels delivered by the synthetic dataset enabled us to experiment with hallucination detection models. Logistic Regression models were trained based on different variations of entropy features. Due to hallucinations in the raw dataset, the false synthetic labels are noisy, hurting the model's precision. Nevertheless, dropout ensembles outperformed the remaining models and the NER baseline with a score of 0.55 in terms of $AUC-PR$. Given the imbalance of the dataset, it translates into a decent detection model. 
+
+
+\section{Future work}
+% deep ensemble might be overfitting
+The work accomplished in this thesis naturally suffers from some limitations. They are discussed in the following sections, along with areas for improvement.
+
+%of the framework
+
+\subsection{Adversarial robustness}
+
+Further investigations in the field of adversarial UQ robustness are essential to fortify our models against unexpected challenges and increase trust in their predictions, especially in real-world situations where the stakes are high.
+
+The current evaluation was only performed using three attacks for the Logistic Regression model due to the limitations of the \textit{ART} library. Indeed, \textit{ART} is image-oriented and only offers a limited set of attacks for tabular data. Some experimentation has been carried out with two other attacks: Hop Skip Jump\cite{HopSkipJump} and Targeted Universal Perturbations\cite{TargetedUniversalPerturbations}. However, modifying their attack step size is impossible, which does not fit well with our evaluation setup. Regarding models,  Logistic Regression and C-Support Vector classification are the only supported \textit{scikit-learn} models that can be attacked by FGSM. Consequently, additional research to support more attacks on tabular data and models to extend the \textit{ART} library and evaluation framework would be a suitable subsequent step.
+
+Besides, a qualitative assessment of the plots is required to evaluate the models. The package would benefit from the creation and validation of a formal metric for out-of-distribution UQ evaluation. For instance, given an ordered attack step size series $\{\epsilon_i\}_i$ and the corresponding series of mean entropies $\Bar{\Entropy} = \{\Bar{\Entropy_i}(\epsilon_i)\}_i$, a candidate metric could be the area between $\Bar{\Entropy}$ and its cumulative maximum series.
+
+\subsection{UQ for graph-to-text}
+
+First of all, table \ref{table:G2T-models} suggests that an improvement in the quality of the graph-to-text model, e.g. in BLEU score, correlates with an improvement in the faithfulness of the model and impacts UQ performance. In that regard, we could not reach the same $T5$ performance level as reported in the JointGT\cite{JointGT} paper, which could have affected the results. There is a difference of 0.0122 in BLEU score.
+
+The only source of hallucination covered in this work concerns missing edge information. However, other important sources should not be neglected, e.g. human labelling errors or the misrepresentation of numbers as tokens\cite{surveyHallucination, representingNumbersNLP}. Given the importance of numbers in financial applications, it would be interesting to reflect on developing a specialised UQ tool for dealing with them.
+
+The performance issues with the graph-encoding ensembles are also an area that could be further investigated. For instance, we tried to train graph-to-text models with data augmentation based on multiple graph linearisations. However, the reported performance was inferior to the base model. Specialised linearisations constructed using BFS or DFS traversals could bring an improvement compared to random ones. Deep-seed ensembles were also expected to perform better. As stated in section \ref{experiment:entropy-predictive-power}, training hyper-parameter ensembles to bring more variability in the output is a promising direction to look at.
+
+If the hallucination detection models of section \ref{design:hallucination-detection-models} were primarily introduced to study the predictive power of entropy for this task, some research for extra features to be added to the model is probably required to be able to use it in production. An orthogonal research direction could be to rephrase the detection task as a named entity recognition task with a single label. Hence, transformers-based architecture could be used with updated embedding layers to incorporate entropy features.
+
+Finally, the UQ evaluation was carried out using the targeted decoding procedure (cf. algorithm \ref{alg:targeted-decoding}) to reproduce the reference texts. However, a more realistic approach would be to rely on the texts generated by the graph-to-text model. The hallucination detection model of section \ref{experiment:entropy-predictive-power} could be applied to the test set to generate the prediction labels $\{\hat{a}_{i,j}\}_{i,j}$ and, therefore, compute the $MHE$ value. It introduces some flexibility regarding the choice of decoding algorithm, and a study of their impact on UQ quality could also be conducted.  
+
+ 
+%Recently, variations of decoding and sampling algorithms have been introduced.
+%Use conformal prediction to select a proper $p$ in decoding to produce calibrated outputs.
+
+%Transform ensembling can also be performed using different techniques than targeted decoding.

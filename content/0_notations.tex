@@ -1,0 +1,12 @@
+\begin{itemize}
+    \item $X \in \R^{N \times D} = \{x_i\}_{i=1}^N$ the input data. 
+    \item $\mathcal{C} = \{1,\ldots, K\}$ the number of classes for classification.
+    \item $Y = \{y_i\}_{i=1}^N$ the target data where $y_i \in \R$ for regression and $y_i \in \{C\}$.
+    %or clusters for clustering. 
+    \item $D = \{X,Y\} = \{(x_i,y_i)\}_{i=1}^N  $ the datase set. $D_{train}$ and $D_{test}$ respectively refer to the training and test set.
+    \item $\Delta(N) = \left\{ x \in \R^N \;:\;\forall_i \, x_i \geq 0, \; \sum_{i=1}^N x_i = 1\right\}$ the probability simplex of size $N$.
+    \item $f$ the model prediction function such that $\hat y_i = f(x_i)$.
+    \item $\mathcal{E} = \{f^1, \ldots, f^M\}$ an ensemble of size $M$.
+    \item $\hat y^m_i = f^m(x_i)$ the prediction of model $m = 1, \ldots, M$  in the ensemble $\mathcal{E}$ for data point $x_i$.
+
+\end{itemize}

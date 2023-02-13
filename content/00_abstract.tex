@@ -1,0 +1,9 @@
+Uncertainty quantification (UQ) is the process of estimating and characterising the uncertainty of predictions made by machine learning (ML) models. It is crucial to assess the reliability of model predictions to effectively utilise ML systems and make informed decisions based on predictions.
+Even though UQ is becoming increasingly popular in the industry, e.g. healthcare and transportation, it is currently challenging to compare and evaluate the results of UQ techniques across different tasks and models due to a lack of standardisation in the tools and methods used for this purpose.
+To address this issue, this thesis project proposes a \textit{scikit-learn} compatible Python package that gathers and standardises different UQ tools. 
+It also provides a robust evaluation on both in and out-of-distribution data via adversarial methods.
+In addition, this project also focuses on a better understanding of hallucinations and factuality in graph-to-text models and, in particular, on how they relate to the model's uncertainty. To this end, we propose a method for building a synthetic hallucination dataset. The latter is used to establish a relationship between uncertainty and hallucination occurrence and to evaluate the predictive power of entropy for detecting hallucinations. Two metrics, the mean hallucination entropy (MHE) and the mean hallucination entropy difference (MHED), are also introduced to compare UQ models for text generation.  
+Overall, the evaluation results demonstrate that the proposed standardised API is able to train accurate and calibrated UQ models. The hallucination detection method was also found to be effective, with an average area under the precision-recall curve of 55\% for the WebNLG dataset with an imbalance ratio of 5\%.
+
+
+% Additionally, there has been little research on the relationship between uncertainty and hallucinations in data-to-text models

@@ -16,7 +16,7 @@
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[tracking=true,kerning=true,spacing=true]{microtype}
-\usepackage[DIV=14,BCOR=2mm,headinclude=true,footinclude=false]{typearea}
+\usepackage[DIV=12,BCOR=2mm,headinclude=true,footinclude=false]{typearea}
 \usepackage[
   backend=biber,
   style=numeric-comp,
@@ -128,8 +128,8 @@ by \@author\par
 \vspace{1.5\baselineskip}
 \@adviser\\
 Thesis Advisor \\[1\baselineskip]
-\@expert\\
-External Expert \\[1\baselineskip]
+%\@expert\\
+%External Expert \\[1\baselineskip]
 \@supervisor\\
 Thesis Supervisor\par
 \centering
@@ -172,14 +172,14 @@ and show them with \texttt{\textbackslash{}makededication}.
 }
 
 \def\@acknowledgments{%
-This is where you thank those who supported you on this journey. Good examples
-are your significant other, family, advisers, and other parties that inspired
-you during this project. Generally this section is about 1/2 page to a page.
 
-Consider acknowledging the use and location of this thesis package.
+I want to express my deep gratitude to my supervisors at Oracle Labs: Doga Tekin, Marcel Gwerder and Rhicheek Patra, for their excellent guidance and support throughout my project. They have provided me with valuable insights and assistance to help me achieve success. I am also grateful to Professor Antoine Bosselut for his thoughtful questions, valuable feedback, and helpful advice on my project.
 
-Define your acknowledgments in \texttt{\textbackslash{}acknowledgments\{...\}}
-and show them with \texttt{\textbackslash{}makeacks}.
+I cannot express enough appreciation to my family and friends. Their encouragement and belief in me have been a constant source of motivation and strength. I am truly thankful for all of their love and support.
+
+
+% Define your acknowledgments in \texttt{\textbackslash{}acknowledgments\{...\}}
+% and show them with \texttt{\textbackslash{}makeacks}.
 }
 \newcommand{\acknowledgments}[1]{
   \def\@acknowledgments{#1}
@@ -196,15 +196,21 @@ and show them with \texttt{\textbackslash{}makeacks}.
 
 \bigskip
  
-\noindent\textit{Lausanne, \today}
+\noindent\textit{Zurich, \today}
 \hfill \@author
 }
 
 \def\abstract{\cleardoublepage
 \chapter*{Abstract}
 \markboth{Abstract}{Abstract}
-\addcontentsline{toc}{chapter}{Abstract (English/Français)}}
+\addcontentsline{toc}{chapter}{Abstract}}
 \def\endabstract{}
+
+\def\notations{\cleardoublepage
+\chapter*{Notations}
+\markboth{Notations}{Notations}
+\addcontentsline{toc}{chapter}{Notations}}
+\def\endnotations{}
 
 \def\frenchabstract{\begin{otherlanguage}{french}
 \cleardoublepage

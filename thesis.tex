@@ -13,7 +13,61 @@
 \documentclass[a4paper,11pt,oneside]{report}
 % Options: MScThesis, BScThesis, MScProject, BScProject
 \usepackage[MScThesis,lablogo]{EPFLreport}
+\microtypecontext{spacing=nonfrench}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{csquotes}
+\usepackage{epigraph}
+\setlength{\epigraphwidth}{0.85\textwidth}
 \usepackage{xspace}
+\usepackage{amsmath,amssymb}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{optidef}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{tikz}
+\usepackage{rotating}
+\usepackage{booktabs}
+\setlength\heavyrulewidth{0.30ex}
+  \setlength\cmidrulewidth{0.01ex}
+  \setlength\lightrulewidth{0.17ex}
+
+\usepackage[
+    left = \flqq{},% 
+    right = \frqq{},% 
+    leftsub = \flq{},% 
+    rightsub = \frq{} %
+]{dirtytalk}
+\usepackage{multirow}
+\usepackage{listings}
+\DeclareMathOperator{\E}{\mathbb{E}}
+\DeclareMathOperator{\EX}{\mathbb{E}}
+\DeclareMathOperator{\Pb}{\mathbb{P}}
+\DeclareMathOperator{\R}{\mathbb{R}}
+\DeclareMathOperator{\Entropy}{\mathcal{H}}
+\newcommand{\Loss}{\mathcal{L}}
+\newcommand{\Normal}{\mathcal{N}}
+\DeclareMathOperator*{\argmin}{\arg\min}
+\DeclareMathOperator*{\argmax}{\arg\max}
+
+
+\dedication{
+
+\epigraph{Uncertainty is the only certainty there is, and knowing how to live with insecurity is the only security.}{\textit{John Allen Paulos}}
+%\begin{raggedleft}
+%    \\
+%   ---  \\
+  %  Knowledge is an unending adventure at the edge of uncertainty.\\
+  %  --- Jacob Bronowski\\
+%\end{raggedleft}
+%\vspace{4cm}
+\begin{center}
+ %   Dedicated to my pet bunny.
+\end{center}
+
+}
+
+
 
 \title{Uncertainty Quantification for Machine Learning}
 \author{Lucas Giordano}
@@ -30,20 +84,29 @@
 \makeacks
 
 \begin{abstract}
-The \sysname tool enables lateral decomposition of a multi-dimensional
-flux compensator along the timing and space axes.
 
-The abstract serves as an executive summary of your project.
-Your abstract should cover at least the following topics, 1-2 sentences for
-each: what area you are in, the problem you focus on, why existing work is
-insufficient, what the high-level intuition of your work is, maybe a neat
-design or implementation decision, and key results of your evaluation.
+%The abstract serves as an executive summary of your project.
+%Your abstract should cover at least the following topics, 1-2 sentences for
+%each: what area you are in, the problem you focus on, why existing work is
+%insufficient, what the high-level intuition of your work is, maybe a neat
+%design or implementation decision, and key results of your evaluation.
+
+%%%%%%%%%%%%%%%%%%%%%
+
+\input{content/00_abstract.tex}
+% TODO: change number
+
 \end{abstract}
 
-\begin{frenchabstract}
-For a doctoral thesis, you have to provide a French translation of the
-English abstract. For other projects this is optional.
-\end{frenchabstract}
+%\begin{frenchabstract}
+%For a doctoral thesis, you have to provide a French translation of the
+%English abstract. For other projects this is optional.
+%\end{frenchabstract}
+
+\begin{notations}
+\input{content/0_notations.tex}
+\end{notations}
+
 
 \maketoc
 
@@ -51,88 +114,58 @@ English abstract. For other projects this is optional.
 \chapter{Introduction}
 %%%%%%%%%%%%%%%%%%%%%%
 
-The introduction is a longer writeup that gently eases the reader into your
-thesis~\cite{dinesh20oakland}. Use the first paragraph to discuss the setting.
-In the second paragraph you can introduce the main challenge that you see.
-The third paragraph lists why related work is insufficient.
-The fourth and fifth paragraphs discuss your approach and why it is needed.
-The sixth paragraph will introduce your thesis statement. Think how you can
-distill the essence of your thesis into a single sentence.
-The seventh paragraph will highlight some of your results
-The eights paragraph discusses your core contribution.
-
-This section is usually 3-5 pages.
-
+\input{content/1_introduction}
 %%%%%%%%%%%%%%%%%%%%
-\chapter{Background}
+\chapter{Background}  \label{chatper:background}
 %%%%%%%%%%%%%%%%%%%%
+\input{content/2_background}
 
-The background section introduces the necessary background to understand your
-work. This is not necessarily related work but technologies and dependencies
-that must be resolved to understand your design and implementation.
+%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Related Work}  \label{chatper:related-work}
+%%%%%%%%%%%%%%%%%%%%%%
 
-This section is usually 3-5 pages.
-
+\input{content/3_related_work}
 
 %%%%%%%%%%%%%%%%
-\chapter{Design}
+\chapter{Design} \label{chatper:design}
 %%%%%%%%%%%%%%%%
 
-Introduce and discuss the design decisions that you made during this project.
-Highlight why individual decisions are important and/or necessary. Discuss
-how the design fits together.
-
-This section is usually 5-10 pages.
+\input{content/4_design}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{Implementation}
+\chapter{Implementation}  \label{chatper:implementation}
 %%%%%%%%%%%%%%%%%%%%%%%%
 
-The implementation covers some of the implementation details of your project.
-This is not intended to be a low level description of every line of code that
-you wrote but covers the implementation aspects of the projects.
-
-This section is usually 3-5 pages.
+\input{content/5_implementation}
 
 
 %%%%%%%%%%%%%%%%%%%%
-\chapter{Evaluation}
+\chapter{Evaluation}  \label{chatper:evaluation}
 %%%%%%%%%%%%%%%%%%%%
 
-In the evaluation you convince the reader that your design works as intended.
-Describe the evaluation setup, the designed experiments, and how the
-experiments showcase the individual points you want to prove.
+\input{content/6_evaluation}
 
-This section is usually 5-10 pages.
+%%%%%%%%%%%%%%%%%%%%
+\chapter{Experiments}
+%%%%%%%%%%%%%%%%%%%%
 
-
-%%%%%%%%%%%%%%%%%%%%%%
-\chapter{Related Work}
-%%%%%%%%%%%%%%%%%%%%%%
-
-The related work section covers closely related work. Here you can highlight
-the related work, how it solved the problem, and why it solved a different
-problem. Do not play down the importance of related work, all of these
-systems have been published and evaluated! Say what is different and how
-you overcome some of the weaknesses of related work by discussing the 
-trade-offs. Stay positive!
-
-This section is usually 3-5 pages.
-
+\input{content/7_experiments}
 
 %%%%%%%%%%%%%%%%%%%%
 \chapter{Conclusion}
 %%%%%%%%%%%%%%%%%%%%
 
-In the conclusion you repeat the main result and finalize the discussion of
-your project. Mention the core results and why as well as how your system
-advances the status quo.
+
+
+\input{content/8_conclusion}
 
 \cleardoublepage
 \phantomsection
 \addcontentsline{toc}{chapter}{Bibliography}
 \printbibliography
+
+\input{content/9_Annex.tex}
 
 % Appendices are optional
 % \appendix
